@@ -28,7 +28,10 @@ from os.path import join
 sys.path.append(join(platform.get_package_dir("tool-esptoolpy")))
 import esptool
 
-FRAMEWORK_DIR = platform.get_package_dir("framework-arduinoespressif32")
+FRAMEWORK_DIR = platform.get_package_dir("framework-espidf")
+if not FRAMEWORK_DIR:
+    raise ValueError("Could not find the ESP-IDF framework directory.")
+
 variants_dir = join(FRAMEWORK_DIR, "variants", "luciferin")
 
 def esp32_create_combined_bin(source, target, env):
